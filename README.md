@@ -11,9 +11,9 @@ Démo Vidéo
 Lien vers la vidéo de démonstration - https://drive.google.com/file/d/1JEemJL5_a3znow4mWpfpjcDauXeH8uTg/view?usp=sharing 
 
 Installation
-1. `npm install`
-2. Configurer le fichier `.env` selon `.env.example`
-3. `npm run dev`
+1. npm install
+2. Configurer le fichier .env selon .env.example
+3. npm run dev
 
 
 
