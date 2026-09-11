@@ -3,8 +3,15 @@ import { Server } from "socket.io";
 import type { ChatMessage, ClientToServerEvents, ServerToClientEvents, SocketData } from "./events.js";
 import { verifyAccessToken, type TokenPayload } from "../services/token.service.js";
 
+let io: Server<ClientToServerEvents, ServerToClientEvents, {}, SocketData> | undefined;
+
+export function getIO() {
+  if (!io) throw new Error("Socket.IO n'est pas initialisé. ");
+  return io;  
+}
+
 export function setupSocketServer(server: http.Server) {
-  const io = new Server<ClientToServerEvents, ServerToClientEvents, {}, SocketData>(server, {
+  io = new Server<ClientToServerEvents, ServerToClientEvents, {}, SocketData>(server, {
     cors: { origin: "*" },
   });
 
@@ -24,9 +31,9 @@ export function setupSocketServer(server: http.Server) {
   });
 
   async function broadcastPresence() {
-    const sockets = await io.fetchSockets();
+    const sockets = await io!.fetchSockets();
     const guides = sockets.filter((s) => s.data.user.role === "guide").length;
-    io.emit("presence:update", { visitors: sockets.length - guides, guides });
+    io!.emit("presence:update", { visitors: sockets.length - guides, guides });
   }
 
   io.on("connection", (socket) => {
@@ -45,7 +52,7 @@ export function setupSocketServer(server: http.Server) {
         text, 
         date: new Date().toISOString() 
       };
-      io.emit("chat:message", message);
+      io!.emit("chat:message", message);
     });
 
     socket.on("disconnect", () => {
