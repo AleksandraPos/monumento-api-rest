@@ -8,6 +8,7 @@ import "./models/monument.model.js";
 import "./models/user.model.js";
 import "./models/anecdote.model.js";
 import "./models/associations.js";
+import "./models/favorite.model.js";
 
 import { initDatabase } from "./db/sequelize.js";
  

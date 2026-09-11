@@ -10,6 +10,7 @@ import { authRouter } from "./routes/auth.routes.js";
 import cors from "cors";
 import helmet from "helmet";
 import { mountSwagger } from "./docs/swagger.js";
+import { favoriteRouter } from "./routes/favorite.routes.js";
 
 export function createApp() {
   const app = express();
@@ -40,6 +41,7 @@ export function createApp() {
   app.use("/auth", authRouter);
   app.use("/monuments", requireAuth, monumentRouter);
   app.use("/anecdotes", requireAuth, anecdoteRouter);
+  app.use("/favorites", requireAuth, favoriteRouter);
   // Erreurs (toujours en dernier)
   app.use(errorHandler);
 
