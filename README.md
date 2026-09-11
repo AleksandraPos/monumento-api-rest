@@ -2,7 +2,7 @@ Monumento API REST
 
 TP Node.js (Express, Sequelize, Socket.io)
 
-Fonctionnalités
+Fonctionnalités:
 - Système d'anecdotes (One-to-Many)
 - Système de favoris (Many-to-Many)
 - Notifications WebSocket en temps réel (monument:created)
